@@ -63,7 +63,7 @@ impl Rocket {
     pub fn update_state(&mut self, dt: physics::Second) {
         const k: f64 = 0.1; // air resistance coefficient
         // calculate force
-        let R = physics::Newton(k * self.velocity.magnitude().0); // resistance
+        let R = physics::Newton(k * self.velocity.norm() * self.velocity.norm()); // resistance
         let F = self.bottle.thrust - R; // force
         let Fx = F * self.angle.cos();
         let Fy = F * self.angle.sin();
@@ -74,10 +74,10 @@ impl Rocket {
 
         // update acceleration and velocity
         self.acceleration = vec::MathVec2::new(ax, ay);
-        self.velocity = vec::MathVec2::new(self.velocity.x + ax * dt.0, self.velocity.y + ay * dt.0);
+        self.velocity = vec::MathVec2::new(self.velocity.x + ax * dt, self.velocity.y + ay * dt);
 
         // update position
-        self.position = vec::MathVec2::new(self.position.x + self.velocity.x * dt.0, self.position.y + self.velocity.y * dt.0);
+        self.position = vec::MathVec2::new(self.position.x + self.velocity.x * dt, self.position.y + self.velocity.y * dt);
 
         // update time
         self.time = physics::Second(self.time.0 + dt.0);

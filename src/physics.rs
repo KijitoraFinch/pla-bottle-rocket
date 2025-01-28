@@ -178,6 +178,12 @@ impl Velocity {
     }
 }
 
+impl Into<f64> for Velocity {
+    fn into(self) -> f64 {
+        self.0
+    }
+}
+
 impl Add for Velocity {
     type Output = Self;
 
