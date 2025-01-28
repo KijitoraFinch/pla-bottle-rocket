@@ -30,8 +30,8 @@ impl Sub for Meter {
 impl Mul for Meter {
     type Output = SquareMeter;
 
-    fn mul(self, other: Self) -> Self {
-        Meter(self.0 * other.0)
+    fn mul(self, other: Self) -> SquareMeter {
+        SquareMeter(self.0 * other.0)
     }
 }
 
